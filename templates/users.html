@@ -1,0 +1,25 @@
+{%- extends "base.html" %}
+{%block content %}
+    <h3> Users Dashboard</h3>
+    <table id="data" class="table table-striped">
+        <thead>
+            <th> id</th>
+            <th> first name </th>
+            <th> last name </th>
+            <th> username </th>
+            <th> email </th>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td> {{ user.id }}</td>
+                <td> {{user.first_name }}</td>
+                <td> {{user.last_name }}</td>
+                <td> {{ user.username}}</td>
+                <td> {{user.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{%- endblock %}
