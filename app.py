@@ -9,6 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 db.init_app(app)
 
 from models.users import User
+from models.courses import Course
 @app.route('/')
 def hello_world():
     # rec = db.get_or_404(User,1)
@@ -20,3 +21,9 @@ def users():
     user_recs = db.session.query(User).all()
     users = list(map(lambda rec: rec.__dict__, user_recs))
     return render_template('users.html', users = users)
+
+@app.route('/courses')
+def courses():
+    course_recs = db.session.query(Course).all() 
+    courses = list(map(lambda rec: rec.__dict__, course_recs))
+    return render_template('courses.html', courses = courses)
