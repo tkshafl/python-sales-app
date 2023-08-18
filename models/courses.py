@@ -1,6 +1,7 @@
 from app import db
 
 class Course(db.Model):
+    __tablename__ = 'courses'
     course_id = db.Column(db.Integer, primary_key = True)
     course_name = db.Column(db.String, nullable=False)
     course_author = db.Column(db.String)
