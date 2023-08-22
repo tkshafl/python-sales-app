@@ -41,3 +41,7 @@ def courses():
     course_recs = db.session.query(Course).all() 
     courses = list(map(lambda rec: rec.__dict__, course_recs))
     return render_template('courses.html', courses = courses)
+
+@app.route('/test')
+def hello():    
+    return "<p> helloworld>p>"
