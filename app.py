@@ -1,16 +1,14 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 
+load_dotenv('.env')
 db = SQLAlchemy()
 app = Flask(__name__)
 Bootstrap(app)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
-# host = 'localhost'
-# port = 5432
-# db_name = 'sales_db'
-# user = 'sales_user'
+ 
 
 host = os.environ.get('SALES_DB_HOST')   
 port = os.environ.get('SALES_DB_PORT')

@@ -19,8 +19,7 @@ jobs:
       - name: enable passwordless login
         env:
           APP_HOST:  ${{ secrets.APP_HOST }}
-          APP_SSH_USER:  ${{ secrets.APP_SSH_USER }}
-          APP_SSH_SECRET_KEY:  ${{ secrets.APP_SSH_SECRET_KEY }}
+          APP_SSH_USER:  ${{ secrets.APP_SSH_USER }} 
         run: |
           mkdir -p /tmp/keys && chmod 700 /tmp/keys
           echo "$APP_SSH_SECRET_KEY" > /tmp/keys/private_key && chmod 600 /tmp/keys/private_key          
@@ -28,8 +27,14 @@ jobs:
       - name: Deploy Application
         env:
           APP_HOST:  ${{ secrets.APP_HOST }}
-          APP_SSH_USER:  ${{ secrets.APP_SSH_USER }}
-          APP_SSH_SECRET_KEY:  ${{ secrets.APP_SSH_SECRET_KEY }}
+          APP_SSH_USER:  ${{ secrets.APP_SSH_USER }} 
         run: |
-            ssh -o StrictHostKeyChecking=no -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} ' mkdir -p ~/python-sales-app '
-            scp -i /tmp/keys/private_key -r * ${APP_SSH_USER}@${APP_HOST}:~/python-sales-app
+          ssh -o StrictHostKeyChecking=no -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} ' mkdir -p ~/python-sales-app '
+          scp -i /tmp/keys/private_key -r * ${APP_SSH_USER}@${APP_HOST}:~/python-sales-app
+
+      - name: build and run application
+        env:
+          APP_HOST:  ${{ secrets.APP_HOST }}
+          APP_SSH_USER:  ${{ secrets.APP_SSH_USER }}
+        run: |
+          ssh -i /tmp/keys/private_key ${APP_SSH_USER}@${APP_HOST} "/bin/bash -c 'source ~/python-sales-app/setup.sh'   " 
