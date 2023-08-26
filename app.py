@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{host}:
 
 db.init_app(app)
 
-from routes import users, course
+from routes import users, courses
 from models.users import User
 
 @app.route('/')
