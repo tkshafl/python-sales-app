@@ -11,6 +11,6 @@ def courses():
 
 @app.route('/course',methods=['get'])
 def course():
-    id = request.args.get('id')
-    course = Course.query.get(id)     
+    course_id = request.args.get('course_id')
+    course = Course.query.get(course_id)     
     return render_template('course_detail.html', course = course)
