@@ -20,10 +20,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{host}:
 
 db.init_app(app)
 
-from routes import users
-from routes import courses
+from routes import users, course
 from models.users import User
-from models.courses import Course
+
 @app.route('/')
 def hello_world():
     # rec = db.get_or_404(User,1)
