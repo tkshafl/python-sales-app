@@ -22,7 +22,11 @@ def user():
             user = User.query.get(id)  
             form_action = request.args.get('action')
             if form_action=="Edit":
-               return render_template('user_form.html', user=user)  
+               return render_template('user_form.html', user=user) 
+            elif form_action == 'Delete' :
+                db.session.delete(user)
+                db.session.commit()
+                return redirect(url_for('users'))   
             else:
                 return render_template('user_detail.html', user = user)
         else:
