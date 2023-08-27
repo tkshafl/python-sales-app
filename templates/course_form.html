@@ -2,16 +2,19 @@
 
 {%block content %}
     <h3> User Form</h3>
-    <form method="POST" class="container">
-        <label for="course_name"><b>Course Name:</b></label>
-        <input type="text" placeholder="enter course name"  name="course_name" />
-        <br><br>
-        <label for="course_author"><b>course Author:</b></label>
-        <input type="text" placeholder="enter course author" name="course_author" />
-        <br><br>
-        <label for="course_endpoint"><b>course  endpoint:</b></label>
-        <input type="text" placeholder="enter course endpoint" name="course_endpoint"/>
-        <br><br>         
-        <button type="submit">Save</button>      
-    </form>
+    <div class="container">
+        <form method="POST" action = {{ url_for('course', course=course)}} >
+            <input type="text" name ="course_id" value = "{{ course.course_id}}" hidden />
+            <label for="course_name"><b>Course Name:</b></label>
+            <input type="text" placeholder="enter course name"  name="course_name" value = "{{ course.course_name}}"/>
+            <br><br>
+            <label for="course_author"><b>course Author:</b></label>
+            <input type="text" placeholder="enter course author" name="course_author" value = "{{ course.course_author}}"/>
+            <br><br>
+            <label for="course_endpoint"><b>course  endpoint:</b></label>
+            <input type="text" placeholder="enter course endpoint" name="course_endpoint" value = "{{ course.course_endpoint}}"/>
+            <br><br>         
+            <button type="submit">Save</button>      
+        </form>
+    </div>
 {%- endblock %}
