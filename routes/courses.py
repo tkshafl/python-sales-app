@@ -16,7 +16,7 @@ def course():
          if course_id:
             course = Course.query.get(course_id) 
             form_action = request.args.get('action')
-            if form_action:
+            if form_action == 'Edit':
                return render_template('course_form.html', course=course)
             elif form_action == 'Delete' :
                 db.session.delete(course)
