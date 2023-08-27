@@ -18,6 +18,10 @@ def course():
             form_action = request.args.get('action')
             if form_action:
                return render_template('course_form.html', course=course)
+            elif form_action == 'Delete' :
+                db.session.delete(course)
+                db.session.commit()
+                return redirect(url_for('courses'))         
             else:      
                return render_template('course_detail.html', course = course)
          else:
