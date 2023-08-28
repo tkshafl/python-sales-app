@@ -1,6 +1,13 @@
 {%- extends "base.html" %}
 {% block content %}
     <h3>Users Dashboard</h3>
+    <form method="GET" action="/users" class="mb-3">
+        <label for="emailSearch" class="form-label">Search by Email:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="emailSearch" name="email" placeholder="Enter email">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     <table id="data" class="table table-striped">
         <thead>
             <th>ID</th>

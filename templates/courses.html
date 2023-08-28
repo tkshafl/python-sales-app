@@ -1,6 +1,13 @@
 {%- extends "base.html" %}
 {%block content %}
     <h3> Courses Dashboard</h3>
+    <form method="GET" action="/courses" class="mb-3">
+        <label for="titleSearch" class="form-label">Search by Title:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="titleSearch" name="title" placeholder="Enter title">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     <table id="data" class="table table-striped">
         <thead>
             <th> id</th>
