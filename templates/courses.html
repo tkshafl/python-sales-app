@@ -7,14 +7,18 @@
             <th> name </th>
             <th> author </th>
             <th> endpoint </th> 
+            <th> action </th> 
         </thead>
         <tbody>
             {% for course in courses %}
             <tr>
-                <td> {{ course.course_id }}</td>
+                <td> <a href="/course?course_id={{ course.course_id }}">{{course.course_id }}</a></td>             
                 <td> {{course.course_name }}</td>
                 <td> {{course.course_author }}</td>
-                <td> {{ course.course_endpoint}}</td>             
+                <td> {{ course.course_endpoint}}</td> 
+                <td>
+                    <a href="/course?action=Edit&course_id={{ course.course_id }}" class="btn btn-primary">Edit</a>                  
+                </td>            
             </tr>
             {% endfor %}
         </tbody>
