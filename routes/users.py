@@ -1,13 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for
+from sqlalchemy import or_
 from app import app
 from app import db
 from models.users import User
 
 @app.route('/users')
 def users():
-    user_recs = db.session.query(User).all()
+    email_query = request.args.get('email')
+
+    if email_query:
+        user_recs = db.session.query(User).filter(or_(User.email.ilike(f'%{email_query.lower()}%'))).all()
+    else:
+        user_recs = db.session.query(User).all()
+
     users = list(map(lambda rec: rec.__dict__, user_recs))
-    return render_template('users.html', users = users)
+    return render_template('users.html', users=users)
 
 # @app.route('/user/<int:id>',methods=['get'])
 # def user(id):

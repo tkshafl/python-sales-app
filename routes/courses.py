@@ -1,13 +1,20 @@
 from flask import Flask, render_template, request,redirect,url_for
+from sqlalchemy import or_
 from app import app
 from app import db
 from models.courses import Course
 
 @app.route('/courses')
 def courses():
-    course_recs = db.session.query(Course).all() 
+    title_query = request.args.get('title')
+
+    if title_query:
+        course_recs = db.session.query(Course).filter(or_(Course.course_name.ilike(f'%{title_query.lower()}%'))).all()
+    else:
+        course_recs = db.session.query(Course).all() 
     courses = list(map(lambda rec: rec.__dict__, course_recs))
     return render_template('courses.html', courses = courses)
+
 
 @app.route('/course',methods=['GET','POST'])
 def course():
